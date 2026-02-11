@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "opencosmo": {
+      "command": "/home/nramachandra/anaconda3/envs/cosmodev/bin/opencosmo-mcp",
+      "args": [],
+      "env": {
+        "OCMCP_WAIT_FOR_COMPLETION": "true",
+        "OCMCP_DATA_IS_LOCAL": "false",
+        "OCMCP_DOWNLOAD_DIR": "/data/a/cpac/nramachandra/Projects/AmSC/tmp/OpenCosmo"
+      }
+    },
+    "mcp-ke": {
+      "command": "/home/nramachandra/anaconda3/envs/cosmodev/bin/mcp_ke",
+      "args": [],
+      "env": {}
+    },
+    "kb-mcp": {
+      "command": "/home/nramachandra/anaconda3/envs/cosmodev/bin/kb-server-stdio",
+      "args": [],
+      "env": {
+        "DISABLE_AUTH": "true"
+      }
+    }
+  }
+}

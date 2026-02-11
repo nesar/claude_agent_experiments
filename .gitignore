@@ -1,0 +1,46 @@
+# Experiment runs and results
+runs/
+
+# API keys and secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Deprecated code
+_deprecated/
+
+# Jupyter notebooks (test artifacts)
+*.ipynb
+.ipynb_checkpoints/
+
+# Temporary data
+tmp/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+tools/.claude/
+
+# MCP server repos (not part of this repo)
+opencosmo-mcp/
+mcp-ke/
+kb-mcp/

@@ -1,0 +1,80 @@
+block: Integer index of the spatial partition (block) within the HDF5 file.
+fof_halo_1D_vel_disp: One-dimensional velocity dispersion of the friends-of-friends (FoF) halo (km/s).
+fof_halo_center_x: X-coordinate of the FoF halo center (comoving units).
+fof_halo_center_y: Y-coordinate of the FoF halo center (comoving units).
+fof_halo_center_z: Z-coordinate of the FoF halo center (comoving units).
+fof_halo_com_vx: X-component of the FoF halo center-of-mass velocity (km/s).
+fof_halo_com_vy: Y-component of the FoF halo center-of-mass velocity (km/s).
+fof_halo_com_vz: Z-component of the FoF halo center-of-mass velocity (km/s).
+fof_halo_com_x: X-coordinate of the FoF halo center-of-mass position (comoving units).
+fof_halo_com_y: Y-coordinate of the FoF halo center-of-mass position (comoving units).
+fof_halo_com_z: Z-coordinate of the FoF halo center-of-mass position (comoving units).
+fof_halo_mass: Total mass of the FoF halo (solar masses).
+fof_halo_tag: Unique integer identifier for the FoF halo.
+sod_halo_1D_vel_disp: One-dimensional velocity dispersion of the spherical overdensity (SOD) halo (km/s).
+sod_halo_GasFracShell2500c: Gas mass fraction in the spherical shell at 2500× critical density.
+sod_halo_L500cBolo: Bolometric X-ray luminosity within R₅₀₀c (erg/s).
+sod_halo_L500cBoloEx: Bolometric X-ray luminosity within R₅₀₀c excluding the core (erg/s).
+sod_halo_L500cErositaHi: Erosita high-energy band X-ray luminosity within R₅₀₀c (erg/s).
+sod_halo_L500cErositaHiEx: Erosita high-energy band X-ray luminosity within R₅₀₀c excluding core (erg/s).
+sod_halo_L500cErositaLo: Erosita low-energy band X-ray luminosity within R₅₀₀c (erg/s).
+sod_halo_L500cErositaLoEx: Erosita low-energy band X-ray luminosity within R₅₀₀c excluding core (erg/s).
+sod_halo_L500cRosat: ROSAT band X-ray luminosity within R₅₀₀c (erg/s).
+sod_halo_L500cRosatEx: ROSAT band X-ray luminosity within R₅₀₀c excluding core (erg/s).
+sod_halo_M200m: Mass within radius where density is 200× mean density (M₂₀₀m, solar masses).
+sod_halo_M2500c: Mass within radius where density is 2500× critical density (M₂₅₀₀c, solar masses).
+sod_halo_M500c: Mass within radius where density is 500× critical density (M₅₀₀c, solar masses).
+sod_halo_MGas200m: Gas mass within the M₂₀₀m radius (solar masses).
+sod_halo_MGas2500c: Gas mass within the M₂₅₀₀c radius (solar masses).
+sod_halo_MGas500c: Gas mass within the M₅₀₀c radius (solar masses).
+sod_halo_MGasHot500c: Hot (>10^6 K) gas mass within the M₅₀₀c radius (solar masses).
+sod_halo_MGasVir: Gas mass within the virial radius (solar masses).
+sod_halo_MStar200m: Stellar mass within the M₂₀₀m radius (solar masses).
+sod_halo_MStar2500c: Stellar mass within the M₂₅₀₀c radius (solar masses).
+sod_halo_MStar500c: Stellar mass within the M₅₀₀c radius (solar masses).
+sod_halo_MStarVir: Stellar mass within the virial radius (solar masses).
+sod_halo_MVir: Total mass within the virial radius (solar masses).
+sod_halo_R200m: Radius enclosing M₂₀₀m (Mpc/h).
+sod_halo_R2500c: Radius enclosing M₂₅₀₀c (Mpc/h).
+sod_halo_R500c: Radius enclosing M₅₀₀c (Mpc/h).
+sod_halo_RVir: Virial radius (Mpc/h).
+sod_halo_T500c: Mean X-ray temperature within R₅₀₀c (keV).
+sod_halo_T500cBolo: Bolometric-weighted temperature within R₅₀₀c (keV).
+sod_halo_T500cBoloEx: Bolometric-weighted temperature within R₅₀₀c excluding core (keV).
+sod_halo_Y500c: Integrated Compton Y-parameter within R₅₀₀c.
+sod_halo_Y5R500c: Integrated Compton Y-parameter within 5× R₅₀₀c.
+sod_halo_bhr: Baryon-to-halo mass ratio within R₅₀₀c.
+sod_halo_c_acc_mass: Halo concentration from mass accretion history.
+sod_halo_c_peak_mass: Halo concentration from the peak mass estimator.
+sod_halo_cdelta: Halo concentration parameter (e.g., c_Δ = R_Δ / r_s).
+sod_halo_cdelta_error: Uncertainty in the concentration parameter.
+sod_halo_com_vx: X-component of SOD halo center-of-mass velocity (km/s).
+sod_halo_com_vy: Y-component of SOD halo center-of-mass velocity (km/s).
+sod_halo_com_vz: Z-component of SOD halo center-of-mass velocity (km/s).
+sod_halo_com_x: X-coordinate of SOD halo center-of-mass position (comoving units).
+sod_halo_com_x_dm: X-coordinate of dark matter center-of-mass (comoving units).
+sod_halo_com_x_gas: X-coordinate of gas center-of-mass (comoving units).
+sod_halo_com_y: Y-coordinate of SOD halo center-of-mass position (comoving units).
+sod_halo_com_y_dm: Y-coordinate of dark matter center-of-mass (comoving units).
+sod_halo_com_y_gas: Y-coordinate of gas center-of-mass (comoving units).
+sod_halo_com_z: Z-coordinate of SOD halo center-of-mass position (comoving units).
+sod_halo_com_z_dm: Z-coordinate of dark matter center-of-mass (comoving units).
+sod_halo_com_z_gas: Z-coordinate of gas center-of-mass (comoving units).
+sod_halo_core_cusp: Inner slope of the density profile (core cusp parameter).
+sod_halo_core_entropy: Entropy at the halo core region (keV cm²).
+sod_halo_core_ne: Electron number density at the core (cm⁻³).
+sod_halo_core_tcool: Cooling time at the core (Gyr).
+sod_halo_count_bar: Number of baryonic particles within R₅₀₀c.
+sod_halo_mass: Total spherical overdensity mass (often M₅₀₀c, solar masses).
+sod_halo_mass_agn: Mass attributed to AGN-driven outflows or components (solar masses).
+sod_halo_mass_dm: Dark matter mass within the chosen overdensity radius (solar masses).
+sod_halo_mass_gas: Total gas mass within the chosen overdensity radius (solar masses).
+sod_halo_mass_nHI: Neutral hydrogen (HI) mass within the overdensity radius (solar masses).
+sod_halo_mass_sfgas: Mass of star-forming gas within the overdensity radius (solar masses).
+sod_halo_mass_star: Stellar mass within the chosen overdensity radius (solar masses).
+sod_halo_mass_wind: Mass in galactic winds or outflows within the overdensity radius (solar masses).
+sod_halo_mmagn_id: Particle ID of the most-massive AGN (MMAGN).
+sod_halo_mmagn_mass: Mass of the most-massive AGN (MMAGN) (solar masses).
+sod_halo_radius: Characteristic radius (often R₅₀₀c) used for spherical overdensity calculations (Mpc/h).
+sod_halo_sfr: Instantaneous star formation rate within the halo (solar masses per year).
+unique_tag: Combination of fof_halo_tag and replication. Since we using snapshots here, it's just the fof tag
