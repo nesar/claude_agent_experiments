@@ -8,7 +8,7 @@ import logging
 import numpy as np
 import opencosmo as oc
 
-from data_tools import concat_sims
+from oc_data import concat_sims
 
 logging.basicConfig(level=logging.INFO)
 

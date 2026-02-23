@@ -180,11 +180,12 @@ instructions that combine MCP tools with analysis patterns. Defined in `.claude/
 
 | Command | Purpose |
 |---------|---------|
-| `/experiment [goal]` | Start a new experiment -- creates timestamped dir, saves prompt, plans analysis |
+| `/experiment [goal]` | Full automated analysis -- creates timestamped dir, plans & executes, generates report |
+| `/research [question]` | Interactive step-by-step research -- human-in-the-loop, phases tracked, asks "what next?" |
 | `/query-hacc [description]` | Query HACC simulation data via opencosmo-mcp Globus Flows |
 | `/power-spectrum [description]` | Run P(k) analysis, model comparison, or MCMC fitting via mcp-ke |
 | `/literature [topic]` | Search arXiv (mcp-ke) and knowledge base (kb-mcp) for references |
-| `/report [experiment dir]` | Generate LaTeX report from experiment results, compile to PDF |
+| `/report [experiment dir]` | Generate LaTeX report -- red query boxes, multi-phase support for `/research` sessions |
 
 **How skills work:** Each skill is a `SKILL.md` file in `.claude/skills/<name>/` containing
 a YAML frontmatter (metadata) and markdown body (instructions). When you type `/experiment

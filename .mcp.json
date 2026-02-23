@@ -10,9 +10,11 @@
       }
     },
     "mcp-ke": {
-      "command": "/home/nramachandra/anaconda3/envs/cosmodev/bin/mcp_ke",
-      "args": [],
-      "env": {}
+      "command": "bash",
+      "args": ["-c", "cd /data/a/cpac/nramachandra/Projects/AmSC/mcp-ke && /home/nramachandra/anaconda3/envs/cosmodev/bin/python mcp_server.py"],
+      "env": {
+        "ARGO_USER": "nramachandra"
+      }
     },
     "kb-mcp": {
       "command": "/home/nramachandra/anaconda3/envs/cosmodev/bin/kb-server-stdio",

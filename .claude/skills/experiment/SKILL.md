@@ -21,3 +21,4 @@ Create a new experiment for the analysis goal described in: $ARGUMENTS
 5. Present the plan to the user before proceeding
 6. All scripts, results, plots, and reports go into this experiment directory using absolute paths
 7. Use OpenCosmo patterns for any data manipulation (never pandas)
+8. When generating the report (via `/report`), the initial research question from `prompt.txt` will be displayed in a red query box in the Introduction section

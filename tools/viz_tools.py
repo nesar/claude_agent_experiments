@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import opencosmo as oc
 
-from data_tools import concat_sims
+from oc_data import concat_sims
 from analysis_tools import compute_scaling_relation
 
 logging.basicConfig(level=logging.INFO)
