@@ -186,6 +186,7 @@ instructions that combine MCP tools with analysis patterns. Defined in `.claude/
 | `/power-spectrum [description]` | Run P(k) analysis, model comparison, or MCMC fitting via mcp-ke |
 | `/literature [topic]` | Search arXiv (mcp-ke) and knowledge base (kb-mcp) for references |
 | `/report [experiment dir]` | Generate LaTeX report -- red query boxes, multi-phase support for `/research` sessions |
+| `/demo-video [experiment dir or description]` | Generate animated MP4 demo video from a completed experiment -- invoke AFTER analysis is complete |
 
 **How skills work:** Each skill is a `SKILL.md` file in `.claude/skills/<name>/` containing
 a YAML frontmatter (metadata) and markdown body (instructions). When you type `/experiment

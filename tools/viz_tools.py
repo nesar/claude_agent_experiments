@@ -3,6 +3,12 @@ Visualization tools for HACC halo catalogs.
 
 Creates publication-quality matplotlib plots from SimulationCollection data.
 Includes particle projection visualization when particle data is available.
+
+Canonical cluster color palette (matches multifield_4field_random6_massive.png):
+  CLUSTER_CMAPS["dm"]    = "pink"
+  CLUSTER_CMAPS["stars"] = "gist_yarg_r"
+  CLUSTER_CMAPS["gas"]   = "plasma_r"
+  CLUSTER_CMAPS["temp"]  = "rainbow_r"
 """
 import logging
 import numpy as np
@@ -13,6 +19,25 @@ from oc_data import concat_sims
 from analysis_tools import compute_scaling_relation
 
 logging.basicConfig(level=logging.INFO)
+
+# ── Canonical cluster color palette ───────────────────────────────────────────
+# These colormaps match the multifield_4field_random6_massive.png images and
+# should be used consistently across all cluster particle visualizations.
+CLUSTER_CMAPS = {
+    "dm":    "pink",        # warm pink/salmon  — dark matter
+    "stars": "gist_yarg_r", # bright white stars on black
+    "gas":   "plasma_r",    # yellow→orange→purple — gas mass
+    "temp":  "rainbow_r",   # cyan=cool → red=hot (reversed) — gas temperature
+}
+
+# Full 4-field definition used by multifield visualizations
+CLUSTER_FIELDS  = [("dm",  "particle_mass"),
+                   ("star","particle_mass"),
+                   ("gas", "particle_mass"),
+                   ("gas", "temperature")]
+CLUSTER_LABELS  = ["Dark Matter", "Stars", "Gas", "Gas Temperature"]
+CLUSTER_CMAP_LIST = [CLUSTER_CMAPS["dm"], CLUSTER_CMAPS["stars"],
+                     CLUSTER_CMAPS["gas"],  CLUSTER_CMAPS["temp"]]
 
 
 def plot_distribution(ds, column, bins=50, log=False, ax=None, save_path=None, **hist_kwargs):
@@ -52,7 +77,7 @@ def plot_distribution(ds, column, bins=50, log=False, ax=None, save_path=None, *
     ax.set_title(f"Distribution of {column} (N={len(x)})", fontsize=13)
 
     if save_path:
-        ax.figure.savefig(save_path, dpi=150, bbox_inches="tight")
+        ax.figure.savefig(save_path, dpi=300, bbox_inches="tight")
         logging.info(f"Saved to {save_path}")
 
     return ax
@@ -128,7 +153,7 @@ def plot_scatter(ds, col_x, col_y, log_x=False, log_y=False,
     ax.set_title(f"{col_y} vs {col_x} (N={len(x)})", fontsize=13)
 
     if save_path:
-        ax.figure.savefig(save_path, dpi=150, bbox_inches="tight")
+        ax.figure.savefig(save_path, dpi=300, bbox_inches="tight")
         logging.info(f"Saved to {save_path}")
 
     return ax
@@ -177,7 +202,7 @@ def plot_scaling_relation(ds, col_x, col_y, log_x=True, log_y=True,
     ax.legend(fontsize=10)
 
     if save_path:
-        ax.figure.savefig(save_path, dpi=150, bbox_inches="tight")
+        ax.figure.savefig(save_path, dpi=300, bbox_inches="tight")
         logging.info(f"Saved to {save_path}")
 
     return ax
@@ -217,7 +242,7 @@ def plot_multi_distribution(ds, columns, log_columns=None, ncols=3, save_path=No
     fig.tight_layout()
 
     if save_path:
-        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+        fig.savefig(save_path, dpi=300, bbox_inches="tight")
         logging.info(f"Saved to {save_path}")
 
     return fig
@@ -300,43 +325,94 @@ def visualize_halo_array(data, halo_ids, field=("dm", "particle_mass"),
     return fig
 
 
-def visualize_halo_multifield(data, halo_ids, save_path=None):
+def visualize_halo_multifield(data, halo_ids, n_fields=4, save_path=None, dpi=300):
     """
-    Create a multi-field projection array: DM + gas mass for each halo.
+    Create a multi-field projection array using the canonical cluster color palette.
+
+    Each row = one halo.  Columns (left→right):
+      n_fields=4  →  Dark Matter | Stars | Gas | Gas Temperature
+      n_fields=2  →  Dark Matter | Gas
+      n_fields=3  →  Dark Matter | Gas | Gas Temperature
+
+    Colors match multifield_4field_random6_massive.png:
+      DM       "pink"
+      Stars    "gist_yarg_r"
+      Gas      "plasma_r"
+      Gas Temp "rainbow_r"
 
     Args:
         data: StructureCollection with particle data.
-        halo_ids: 2D array-like of halo unique_tags (rows = halos, cols = repeated).
-        save_path: If provided, save figure to this path.
+        halo_ids: 1-D array of unique_tags  OR  2-D array (rows=halos, cols=fields).
+                  If 1-D, it is expanded to (N, n_fields) automatically.
+        n_fields: Number of fields to show (2, 3, or 4). Default 4.
+        save_path: If provided, save figure here.
+        dpi: Figure DPI (default 300).
 
     Returns:
         matplotlib.figure.Figure
 
     Example:
-        with oc.open("haloproperties.hdf5", "haloparticles.hdf5") as data:
-            ids = np.array([[id1], [id2], [id3]])
-            fig = visualize_halo_multifield(data, ids)
+        fig = visualize_halo_multifield(data, [tag1, tag2, tag3])
+        fig = visualize_halo_multifield(data, [tag1], n_fields=2)
     """
     from opencosmo.analysis import halo_projection_array
 
-    halo_ids = np.atleast_2d(halo_ids)
+    fields  = CLUSTER_FIELDS[:n_fields]
+    labels  = CLUSTER_LABELS[:n_fields]
+    cmaps   = CLUSTER_CMAP_LIST[:n_fields]
 
+    halo_ids = np.asarray(halo_ids)
+    if halo_ids.ndim == 1:
+        # Expand: same tag repeated across n_fields columns
+        halo_ids = np.column_stack([halo_ids] * n_fields)
+    else:
+        halo_ids = np.atleast_2d(halo_ids)
+
+    n_halos = halo_ids.shape[0]
     params = {
-        "fields": (
-            [("dm", "particle_mass"), ("gas", "particle_mass")],
-        ) * halo_ids.shape[0],
-        "labels": (
-            ["Dark Matter", "Gas"],
-        ) * halo_ids.shape[0],
-        "cmaps": (
-            ["gray", "cividis"],
-        ) * halo_ids.shape[0],
+        "fields": (fields,) * n_halos,
+        "labels": (labels,) * n_halos,
+        "cmaps":  (cmaps,)  * n_halos,
     }
 
     fig = halo_projection_array(halo_ids, data, params=params, length_scale="all left")
+    fig.patch.set_facecolor("black")
 
     if save_path:
-        fig.savefig(save_path, dpi=300, bbox_inches="tight")
+        fig.savefig(save_path, dpi=dpi, bbox_inches="tight", facecolor="black")
         logging.info(f"Saved multi-field array to {save_path}")
+
+    return fig
+
+
+def visualize_halo_single_field(data, tag, field_idx=2, width=4.5, save_path=None, dpi=300):
+    """
+    Render a single field for a single halo using the canonical palette.
+
+    Args:
+        data: StructureCollection with particle data.
+        tag: unique_tag of the halo.
+        field_idx: 0=DM, 1=Stars, 2=Gas (default), 3=Gas Temperature.
+        width: Projection half-width in units of R_halo.
+        save_path: If provided, save figure here.
+        dpi: Figure DPI.
+
+    Returns:
+        matplotlib.figure.Figure
+    """
+    from opencosmo.analysis import halo_projection_array
+
+    halo_ids = np.array([[tag]])
+    params = {
+        "fields": ([CLUSTER_FIELDS[field_idx]],),
+        "labels": ([CLUSTER_LABELS[field_idx]],),
+        "cmaps":  ([CLUSTER_CMAP_LIST[field_idx]],),
+    }
+    fig = halo_projection_array(halo_ids, data, params=params, width=width)
+    fig.patch.set_facecolor("black")
+
+    if save_path:
+        fig.savefig(save_path, dpi=dpi, bbox_inches="tight", facecolor="black")
+        logging.info(f"Saved single-field render to {save_path}")
 
     return fig
